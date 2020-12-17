@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 注意：该文件不要格式化（插值表达式不要有空格）-->
+    <p>{{name}}</p>
+    <p y-text='name'></p>
+    <p>{{age}}</p>
+    <p>{{doubleAge}}</p>
+    <input type="text" y-model="name">
+    <button @click="changeName">呵呵哒</button>
+    <div y-html='html'></div>
+  </div>
+  <script src="./compile.js"></script>
+  <script src="./yvue.js"></script>
+  <script>
+    const zhenge = new Yvue({
+      el: '#app',
+      data: {
+        name: '测试中',
+        age: 1,
+        html: '<h1>你真是牛逼啊</h1>'
+      },
+      created() {
+        console.log("我还在");
+        setTimeout(() => {
+          this.name = '你测试个锤子啊'
+        }, 1500)
+      },
+      methods: {
+        changeName() {
+          this.name = '你是大帅逼啊';
+          this.age = 18
+        },
+      }
+    })
+  </script>
+</body>
+
+</html>
