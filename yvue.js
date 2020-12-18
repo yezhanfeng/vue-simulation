@@ -1,5 +1,4 @@
 // new Yvue( { data:{...} } )
-
 class Yvue {
   constructor(options) {
     // 保存选项
@@ -15,7 +14,7 @@ class Yvue {
     // this.$data.foo.bar;
     new Compile(options.el, this)
     if (options.created) {
-      options.created.call(this)
+      options.created.call(this);
     }
   }
   obverse (value) {
@@ -51,10 +50,10 @@ class Yvue {
   proxyData (key) {
     Object.defineProperty(this, key, {
       get () {
-        return this.$data[key]
+        return this.$data[key];
       },
       set (Newval) {
-        this.$data[key] = Newval
+        this.$data[key] = Newval;
       }
     })
   }

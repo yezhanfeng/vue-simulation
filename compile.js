@@ -11,7 +11,7 @@ class Compile {
       //执行编译
       this.compile(this.$fragment);
       //将编译完的HTML结果追加到$el
-      this.$el.appendChild(this.$fragment)
+      this.$el.appendChild(this.$fragment);
     }
   }
   //将宿主元素中的代码片段拿出来遍历，这样做比较高效
@@ -20,7 +20,7 @@ class Compile {
     //讲el中的所有子元素搬家至frag中
     let child;
     while (child = el.firstChild) {
-      frag.appendChild(child)
+      frag.appendChild(child);
     }
     return frag;
   }
@@ -40,66 +40,66 @@ class Compile {
           const exp = attr.value;
           if (this.isDirective(attrName)) {
             // y-text
-            const dir = attrName.substring(2)
+            const dir = attrName.substring(2);
             // 执行指令
             this[dir] && this[dir](node, this.$vm, exp);
           }
           if (this.isEvent(attrName)) {
-            let dir = attrName.substring(1) //text 
-            this.eventHandler(node, this.$vm, exp, dir)
+            let dir = attrName.substring(1); //text 
+            this.eventHandler(node, this.$vm, exp, dir);
           }
         })
       } else if (this.isInterpolation(node)) {
         //文本
         // console.log('编译文本'+ node.textContent);
-        this.compileText(node)
+        this.compileText(node);
       }
       //递归子节点
       if (node.childNodes && node.childNodes.length > 0) {
-        this.compile(node)
+        this.compile(node);
       }
     })
   }
   compileText (node) {
     // console.log(RegExp.$1);
-    this.update(node, this.$vm, RegExp.$1, 'text')
+    this.update(node, this.$vm, RegExp.$1, 'text');
   }
 
   // 更新函数
   update (node, vm, exp, dir) {
-    const updaterFn = this[dir + 'Updater']
+    const updaterFn = this[dir + 'Updater'];
     // 初始化
-    updaterFn && updaterFn(node, vm[exp])
+    updaterFn && updaterFn(node, vm[exp]);
     // 依赖收集
     new Watcher(vm, exp, (value) => {
-      updaterFn && updaterFn(node, value)
+      updaterFn && updaterFn(node, value);
     })
   }
 
   text (node, vm, exp) {
-    this.update(node, vm, exp, 'text')
+    this.update(node, vm, exp, 'text');
   }
   //双向绑定的处理
   model (node, vm, exp) {
     // 指定input的value属性
-    this.update(node, vm, exp, 'model')
+    this.update(node, vm, exp, 'model');
     // 视图对模型的响应
     node.addEventListener('input', e => {
-      vm[exp] = e.target.value
+      vm[exp] = e.target.value;
     })
   }
   html(node, vm, exp){
     this.update(node, vm, exp, 'html')
   }
   modelUpdater (node, value) {
-    node.value = value
+    node.value = value;
   }
   htmlUpdater (node, value) {
-    node.innerHTML = value
+    node.innerHTML = value;
   }
 
   textUpdater (node, value) {
-    node.textContent = value
+    node.textContent = value;
   }
   isDirective (attr) {
     return attr.indexOf('y-') == 0;
@@ -111,7 +111,7 @@ class Compile {
   eventHandler (node, vm, exp, dir) {
     let fn = vm.$options.methods && vm.$options.methods[exp];
     if (dir && fn) {
-      node.addEventListener(dir, fn.bind(vm))
+      node.addEventListener(dir, fn.bind(vm));
     }
   }
   isElement (node) {
