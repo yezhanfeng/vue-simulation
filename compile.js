@@ -17,7 +17,7 @@ class Compile {
   //将宿主元素中的代码片段拿出来遍历，这样做比较高效
   node2Fragment (el) {
     const frag = document.createDocumentFragment()
-    //讲el中的所有子元素搬家至frag中
+    //将el中的所有子元素搬家至frag中
     let child;
     while (child = el.firstChild) {
       frag.appendChild(child);
