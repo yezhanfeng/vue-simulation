@@ -15,7 +15,7 @@
     <p>{{age}}</p>
     <p>{{doubleAge}}</p>
     <input type="text" y-model="name">
-    <button @click="changeName">呵呵哒</button>
+    <button @click="changeName">点我</button>
     <div y-html='html'></div>
   </div>
   <script src="./compile.js"></script>
@@ -31,12 +31,12 @@
       created() {
         console.log("我还在");
         setTimeout(() => {
-          this.name = '你测试个锤子'
+          this.name = '测试完毕'
         }, 1500)
       },
       methods: {
         changeName() {
-          this.name = '你变了';
+          this.name = '重新提测';
           this.age = 18
         },
       }
